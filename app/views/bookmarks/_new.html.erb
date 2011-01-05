@@ -1,0 +1,16 @@
+<h2>New Bookmark</h2>
+<%= form_for :bookmarking, :url => {:action => "new"} do |b| %>
+<table>
+	<tr>
+		<td><strong>URL: </strong></td>
+		<td><%= b.text_field :url %></td>
+	</tr>
+	<tr>
+		<td><strong>Tags: </strong></td>
+		<td><br /><%= b.text_area(:tags, :cols => 30, :rows => 2) %></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><br /><%= b.submit("Add Bookmark")%></td>
+	</tr>
+</table>
+<% end %>

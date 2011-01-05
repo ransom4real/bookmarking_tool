@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Bookmark Management Service</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Voke Ransom Anighoro" />
+    <meta name="keywords" content=" bookmarking, bookmark, url, bookmark management" />
+    <meta name="description" content="Web application to manage url bookmarking" />
+	<LINK REL="SHORTCUT ICON" HREF="/images/Bookmark.ico">
+	<link href="/stylesheets/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/dropdown/themes/default/default.ultimate.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/style.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="/stylesheets/default.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="/javascripts/development-bundle/themes/base/jquery.ui.all.css" media="all" rel="stylesheet" type="text/css" />
+	<script src="/javascripts/development-bundle/jquery-1.4.4.js"></script>
+	<link rel="stylesheet" href="/stylesheets/jquery.treeview.css" type="text/css" />
+	<script type="text/javascript" src="/javascripts/jquery.treeview.js"></script>
+	<script src="/javascripts/development-bundle/ui/jquery.ui.core.js"></script>
+	<script src="/javascripts/development-bundle/ui/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="/javascripts/development-bundle/ui/jquery.ui.accordion.js"></script>
+	<script type="text/javascript" src="/javascripts/helpers.js"></script>
+	<%= csrf_meta_tag %>
+	<script>
+  $(document).ready(function(){
+    $("#example").treeview();
+  });
+  </script>
+  
+</head>
+<body>
+
+<h1>Bookmark Management Service</h1>
+<br></br>
+<p>
+<div style="float:left;"><a id="new_bookmark" href="">New Bookmark</a></div>
+<div style="float:right"><%= form_for :bookmarking, :url => {:action => "search"} do |b| %> Search: <%= text_field :bookmark, :query %> <%= b.submit("Search")%> <% end %></div>
+</p>
+<br></br>
+    <div align="center">
+	<% if flash[:notice] %>
+      <p id="notice" style="color: green">
+        <%= flash[:notice] %>
+      </p>
+	<% end %>
+	<% if flash[:error] %>
+	  <p id="error" style="color: red">
+        <%= flash[:error] %>
+      </p>
+	<% end %>
+    </div>
+<table class="wmfcCSS" cellspacing="0" cellpadding="0">
+	<colgroup>
+		<col width="290">
+		<col>
+	</colgroup>
+	<tbody>
+		<tr>
+			<td id="sites" class="wmfnCSS">
+				<% if @sites && !@sites.empty? %>
+				<% i = 1 %>
+				<ul id="example" class="filetree">
+				<% for site in @sites %>
+					<% if i == 1 %>
+						<li><span class="folder"><%= site.name %></span>
+							<ul>
+								<li><span class="file"><a id="site_<%= site.id %>" href="#"><%= site.domain %></a></span></li>
+							</ul>
+						</li>
+					<% i = 0 %>
+					<% else %>
+						<li class="closed"><span class="folder"><%= site.name %></span>
+							<ul>
+								<li><span class="file"><a id="site_<%= site.id %>" href="#"><%= site.domain %></a></span></li>
+							</ul>
+						</li>
+					<% end %>
+				<% end %>
+				</ul>
+				<% else %>
+					<b>No Sites Available Yet</b>
+				<% end %>
+			</td>
+			<td id="view" class="wmfnCSS">
+				<div id="mainDisplay" class="wvarootCSS">
+					<%= yield %>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+</body>
+</html>

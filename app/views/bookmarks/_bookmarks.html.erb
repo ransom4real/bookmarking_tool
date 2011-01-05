@@ -1,0 +1,32 @@
+BOOK
+<% if @sites && @sites[0] != nil %>
+<h2>Bookmarks for "<%= @sites[0].domain %>"</h2>
+<% end %>
+<div class="Comments">
+<% if @bookmarks  && @new == nil || @new == 0 %>
+<% if @query && @query != nil %>
+<h2><% if @bookmarks.size > 0 %><%= @bookmarks.size %> Bookmarks <% else %> No bookmark <% end %> returned for Query "<%= @query %>"</h2>
+<% end %>
+<script>
+	$(function() {
+		$( "#accordion" ).accordion();
+	});
+	</script>
+	<div class="demo">
+	<div id="accordion" style="width:80%;">
+	<% for bookmark in @bookmarks %>
+		<h3><a href="#"><%= raw bookmark.page_title == "" ? bookmark.url : bookmark.page_title %></a></h3>
+		<div>
+			<p>
+				<strong>URL: </strong> <%= bookmark.url %><br />
+				<strong>Page Title: </strong> <%= raw bookmark.page_title %><br />
+				<strong>Tags: </strong> <%= bookmark.tags %><br />
+				<strong>Shortening: </strong> <%= bookmark.tiny_url %><br />
+			</p>
+		</div>
+	<% end %>
+	</div>
+<% else %>
+	<%= render "new" %><br />
+<% end %>
+</div>

@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: 
+  id: 1
+  url: http://oldwiki.rubyonrails.org/rails/pages/FullTextSearch
+  tags: Ruby, Rails, Wiki
+  page_title: FullTextSearch in Ruby on Rails
+  meta_data: <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  tiny_url: http://tinyurl.com/2ufea3d
+  site_id: 1
+  bookmark_date: 2010-12-26 19:08:01
+

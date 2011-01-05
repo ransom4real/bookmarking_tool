@@ -1,0 +1,32 @@
+SITES
+<% if @sites && !@sites.empty? %>
+	<% i = 1 %>
+	<ul id="example" class="filetree">
+	<% for site in @sites %>
+		<% if @new_site != 1 %>
+			<% if i == 1 %>
+				<li><span class="folder"><%= site.name %></span>
+					<ul>
+						<li><span class="file"><a id="site_<%= site.id %>" href="#"><%= site.domain %></a></span></li>
+					</ul>
+				</li>
+			<% i = 0 %>
+			<% else %>
+				<li class="closed"><span class="folder"><%= site.name %></span>
+					<ul>
+						<li><span class="file"><a id="site_<%= site.id %>" href="#"><%= site.domain %></a></span></li>
+					</ul>
+				</li>
+			<% end %>
+		<% else %>
+				<li <% site.id == @site_id ? '' : 'class="closed"' %>><span class="folder"><%= site.name %></span>
+					<ul>
+						<li><span class="file"><a id="site_<%= site.id %>" href="#"><%= site.domain %></a></span></li>
+					</ul>
+				</li>
+		<% end %>
+	<% end %>
+	</ul>
+	<% else %>
+		<b>No Sites Available Yet</b>
+<% end %>
